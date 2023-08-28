@@ -29,7 +29,7 @@ export default function CustomInput({ label, type, placeholder, value, onChange,
                     onChange={onChange}
                 >
                     {options.map((option) => (
-                        <option key={Object.keys(option)} value={Object.values(option)}>
+                        <option key={Object.keys(option)} value={Object.keys(option)}>
                             {Object.values(option)}
                         </option>
                     ))}
