@@ -45,9 +45,10 @@ export default function App() {
           return (
             <CustomInput
               label={`${f.label}:`}
-              type="text"
+              type={f.options ? "select": "text"}
               placeholder={f.placeholder}
               onChange={handleInputChange}
+              options={f.options}
             />
           )
         })}
