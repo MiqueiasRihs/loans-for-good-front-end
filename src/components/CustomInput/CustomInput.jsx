@@ -1,6 +1,7 @@
 import './CustomInput.scss';
 
 import ReactInputMask from 'react-input-mask';
+import CurrencyInput from 'react-currency-input-field';
 
 export default function CustomInput({ label, type, placeholder, value, onChange, name, options }) {
     const selectMask = (field_name) => {
@@ -35,6 +36,17 @@ export default function CustomInput({ label, type, placeholder, value, onChange,
                     ))}
                 </select>
             );
+        } else if (type === 'number') {
+            return (
+                <CurrencyInput
+                    className="input-field"
+                    name={name}
+                    placeholder={placeholder}
+                    defaultValue={1000}
+                    decimalsLimit={2}
+                    onValueChange={(value, name) => console.log(value, name)}
+                />
+            )
         }
     };
 

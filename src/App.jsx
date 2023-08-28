@@ -2,11 +2,13 @@ import './App.scss';
 
 import React, { useEffect, useState } from 'react';
 
+import { Notification } from './components/Notification/Notification';
+
 import CustomForm from "./components/CustomForm/CustomForm"
 import CustomInput from './components/CustomInput/CustomInput';
+import CustomButton from './components/CustomButton/CustomButton';
 
 import { request } from './api/api';
-import CustomButton from './components/CustomButton/CustomButton';
 
 export default function App() {
   const [formData, setFormData] = useState({});
@@ -30,7 +32,8 @@ export default function App() {
   };
 
   const handleSubmit = () => {
-    request.postAnalysisData(formData).then((response) => {console.log(response)})
+    request.postAnalysisData(formData)
+    setFormData({});
   };
 
   return (
@@ -57,7 +60,7 @@ export default function App() {
               <CustomInput
                 key={f.name}
                 label={`${f.label}:`}
-                type={f.options ? "select" : "text"}
+                type={f.type}
                 placeholder={f.placeholder}
                 onChange={(e) => handleInputChange(e, f.name)}
                 name={f.name}
@@ -68,6 +71,7 @@ export default function App() {
           <CustomButton onClick={handleSubmit}>Pedir análise</CustomButton>
         </CustomForm>
       </div>
+      <Notification/>
     </>
   );
 }

@@ -1,3 +1,5 @@
+import { notification } from "../components/Notification/Notification";
+
 class LFGRequest {
     constructor() {
         this.base_api_url = "http://localhost:8000/api";
@@ -14,14 +16,15 @@ class LFGRequest {
             body: data ? JSON.stringify(data) : null,
         })
             .then((response) => {
-                if (!response.ok) {
-                    throw new Error('Erro de rede ou servidor.');
-                }
-                return response.json();
+                return response.json().then((data) => {
+                    if (!response.ok) throw new Error(data.message);
+                    notification.success(data.message)
+                    return data;
+                });
             })
             .catch((error) => {
-                console.error('Erro:', error.message);
-                return null;
+                notification.error(error.message);
+                return { error: error.message };
             });
     }
 
