@@ -3,10 +3,10 @@ import './CustomInput.scss';
 import ReactInputMask from 'react-input-mask';
 
 export default function CustomInput({ label, type, placeholder, value, onChange, name, options }) {
-    const selectMask = (field) => {
-        if(field === "document") return "999.999.999-99"
-        if(field === "phone_number") return "(99) 99999-9999"
-        if(field === "birth_date") return "99/99/9999"
+    const selectMask = (field_name) => {
+        if(field_name === "document") return "999.999.999-99"
+        if(field_name === "phone_number") return "(99) 99999-9999"
+        if(field_name === "birth_date") return "99/99/9999"
     }
 
     const renderInput = () => {

@@ -1,0 +1,21 @@
+.submit-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #1d1c46; /* Cor de fundo */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transição de cor de fundo suave */
+    width: 100%;
+    margin: 10px 0;
+  
+    &:hover {
+      background-color: #242361; /* Cor de fundo ao passar o mouse */
+    }
+  }
+  

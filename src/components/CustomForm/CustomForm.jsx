@@ -11,7 +11,7 @@ export default function CustomForm({children, ...atributes}) {
             <h1>Análise de crédito</h1>
             {children}
 
-            <CustomButton>Click here</CustomButton>
+            <CustomButton>Pedir análise</CustomButton>
         </div>
     )
 }

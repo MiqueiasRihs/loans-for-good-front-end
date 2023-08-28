@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import CustomForm from "./components/CustomForm/CustomForm"
 import CustomInput from './CustomInput/CustomInput';
 
-import request from './api/api'
+import {request} from './api/api';
 
 export default function App() {
   const [text, setText] = useState('');
@@ -13,10 +13,11 @@ export default function App() {
 
   const handleInputChange = (e) => {
     setText(e.target.value);
+    console.log(text)
   };
 
   useEffect(() => {
-    request('GET', 'http://localhost:8000/api/analise-de-cliente/').then((data) => {
+    request.getFieldsForm().then((data) => {
       if(data) {
         setInputList(data.fields)
       }

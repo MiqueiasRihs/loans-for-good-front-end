@@ -1,22 +1,38 @@
-export default function request(method, url, data = null) {
-    return fetch(url, {
-        method: method,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: data ? JSON.stringify(data) : null,
-    })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error('Erro de rede ou servidor.');
-            }
-            return response.json();
+class LFGRequest {
+    constructor() {
+        this.base_api_url = "http://localhost:8000/api";
+    }
+
+    request(method, url, data = null) {
+        let Url = new URL(this.base_api_url + url);
+
+        return fetch(Url, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: data ? JSON.stringify(data) : null,
         })
-        .catch((error) => {
-            console.error('Erro:', error.message);
-            return null;
-        });
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Erro de rede ou servidor.');
+                }
+                return response.json();
+            })
+            .catch((error) => {
+                console.error('Erro:', error.message);
+                return null;
+            });
+    }
+
+    getFieldsForm() {
+        let url = "/analise-de-cliente"
+        return this.request('GET', url);
+    }
 }
+
+export const request = new LFGRequest()
+
 
 // Exemplo de uso:
 
