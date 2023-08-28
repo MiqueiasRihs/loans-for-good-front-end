@@ -3,7 +3,7 @@ import "./CustomButton.scss"
 export default function CustomButton({ children, ...attributes }) {
   return (
     <button
-      type="button"
+      type="submit"
       className="submit-button"
       {...attributes}
     >

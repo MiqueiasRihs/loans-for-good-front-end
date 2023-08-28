@@ -5,25 +5,33 @@ import React, { useEffect, useState } from 'react';
 import CustomForm from "./components/CustomForm/CustomForm"
 import CustomInput from './CustomInput/CustomInput';
 
-import {request} from './api/api';
+import { request } from './api/api';
+import CustomButton from './components/CustomButton/CustomButton';
 
 export default function App() {
-  const [text, setText] = useState('');
+  const [formData, setFormData] = useState({});
   const [inputList, setInputList] = useState([])
-
-  const handleInputChange = (e) => {
-    setText(e.target.value);
-    console.log(text)
-  };
 
   useEffect(() => {
     request.getFieldsForm().then((data) => {
-      if(data) {
+      if (data) {
         setInputList(data.fields)
       }
     })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const handleInputChange = (e, fieldName) => {
+    const newValue = e.target.value;
+    setFormData((prevData) => ({
+      ...prevData,
+      [fieldName]: newValue,
+    }));
+  };
+
+  const handleSubmit = () => {
+    request.postAnalysisData(formData).then((response) => {console.log(response)})
+  };
 
   return (
     // <div className='App-header'></div>
@@ -33,30 +41,31 @@ export default function App() {
           label="Nome:"
           type="text"
           placeholder="Digite seu nome"
-          onChange={handleInputChange}
+          onChange={(e) => handleInputChange(e, 'name')}
           name="name"
         />
         <CustomInput
           label="Documento:"
           type="text"
           placeholder="Digite seu CPF"
-          onChange={handleInputChange}
+          onChange={(e) => handleInputChange(e, 'document')}
           name="document"
         />
 
         {inputList.map((f) => {
           return (
             <CustomInput
+              key={f.name}
               label={`${f.label}:`}
-              type={f.options ? "select": "text"}
+              type={f.options ? "select" : "text"}
               placeholder={f.placeholder}
-              onChange={handleInputChange}
+              onChange={(e) => handleInputChange(e, f.name)}
               name={f.name}
-              options={f.options}
+              options={f.options ? f.options : null}
             />
           )
         })}
-        
+        <CustomButton onClick={handleSubmit}>Pedir análise</CustomButton>
       </CustomForm>
     </div>
   );

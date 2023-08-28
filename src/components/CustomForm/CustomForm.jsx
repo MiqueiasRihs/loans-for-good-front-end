@@ -1,8 +1,6 @@
 import './CustomForm.scss'
 
 import CustomButton from '../CustomButton/CustomButton'
-import request from '../../api/api'
-
 
 export default function CustomForm({children, ...atributes}) {
 
@@ -10,8 +8,6 @@ export default function CustomForm({children, ...atributes}) {
         <div className='form-container'>
             <h1>Análise de crédito</h1>
             {children}
-
-            <CustomButton>Pedir análise</CustomButton>
         </div>
     )
 }
