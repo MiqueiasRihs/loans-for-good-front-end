@@ -33,12 +33,14 @@ export default function App() {
           type="text"
           placeholder="Digite seu nome"
           onChange={handleInputChange}
+          name="name"
         />
         <CustomInput
           label="Documento:"
           type="text"
           placeholder="Digite seu CPF"
           onChange={handleInputChange}
+          name="document"
         />
 
         {inputList.map((f) => {
@@ -48,6 +50,7 @@ export default function App() {
               type={f.options ? "select": "text"}
               placeholder={f.placeholder}
               onChange={handleInputChange}
+              name={f.name}
               options={f.options}
             />
           )
