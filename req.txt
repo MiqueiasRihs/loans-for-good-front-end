@@ -1,6 +1,0 @@
-react-input-mask
-node-sass
-axios
-react-notifications
-react-toastify
-react-currency-input-field
