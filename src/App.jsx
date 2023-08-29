@@ -13,7 +13,6 @@ import { request } from './api/api';
 export default function App() {
   const [formData, setFormData] = useState({});
   const [inputList, setInputList] = useState([])
-  const [error, setError] = useState('');
 
   useEffect(() => {
     request.getFieldsForm().then((data) => {
@@ -33,12 +32,17 @@ export default function App() {
   };
 
   const handleSubmit = () => {
-    if (Object.keys(formData).length === 0) {
-      notification.error('Preencha todos os campos')
+    let checkInputs = []
+    inputList.forEach(field => {
+      let field_name = field.name
+      if(formData[field_name] === undefined || formData[field_name] === "") {
+        checkInputs.push(field_name)
+      }
+    });
 
-    } else {
-      request.postAnalysisData(formData)
-    }
+    if(checkInputs.length > 0) return notification.error('Preencha todos os campos') 
+    
+    request.postAnalysisData(formData)
   };
 
   return (

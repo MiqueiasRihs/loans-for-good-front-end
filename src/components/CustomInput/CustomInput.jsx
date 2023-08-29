@@ -44,6 +44,7 @@ export default function CustomInput({ label, type, placeholder, value, onChange,
                     placeholder={placeholder}
                     defaultValue={''}
                     decimalsLimit={2}
+                    onChange={onChange}
                 />
             )
         }
