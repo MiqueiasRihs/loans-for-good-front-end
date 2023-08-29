@@ -2,7 +2,7 @@ import './App.scss';
 
 import React, { useEffect, useState } from 'react';
 
-import { Notification } from './components/Notification/Notification';
+import { Notification, notification } from './components/Notification/Notification';
 
 import CustomForm from "./components/CustomForm/CustomForm"
 import CustomInput from './components/CustomInput/CustomInput';
@@ -13,6 +13,7 @@ import { request } from './api/api';
 export default function App() {
   const [formData, setFormData] = useState({});
   const [inputList, setInputList] = useState([])
+  const [error, setError] = useState('');
 
   useEffect(() => {
     request.getFieldsForm().then((data) => {
@@ -32,8 +33,12 @@ export default function App() {
   };
 
   const handleSubmit = () => {
-    request.postAnalysisData(formData)
-    setFormData({});
+    if (Object.keys(formData).length === 0) {
+      notification.error('Preencha todos os campos')
+
+    } else {
+      request.postAnalysisData(formData)
+    }
   };
 
   return (
@@ -55,7 +60,7 @@ export default function App() {
             name="document"
           />
 
-          {inputList.map((f) => {
+          {inputList?.map((f) => {
             return (
               <CustomInput
                 key={f.name}
@@ -71,7 +76,7 @@ export default function App() {
           <CustomButton onClick={handleSubmit}>Pedir análise</CustomButton>
         </CustomForm>
       </div>
-      <Notification/>
+      <Notification />
     </>
   );
 }

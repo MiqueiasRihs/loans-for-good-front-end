@@ -17,7 +17,9 @@ class LFGRequest {
         })
             .then((response) => {
                 return response.json().then((data) => {
-                    if (!response.ok) throw new Error(data.message);
+                    if (!response.ok) {
+                        throw new Error(data.message);
+                    }
                     notification.success(data.message)
                     return data;
                 });

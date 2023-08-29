@@ -42,9 +42,8 @@ export default function CustomInput({ label, type, placeholder, value, onChange,
                     className="input-field"
                     name={name}
                     placeholder={placeholder}
-                    defaultValue={1000}
+                    defaultValue={''}
                     decimalsLimit={2}
-                    onValueChange={(value, name) => console.log(value, name)}
                 />
             )
         }
